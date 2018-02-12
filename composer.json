@@ -1,0 +1,14 @@
+{
+  "name": "cmpayments/orderapi-sdk-php",
+  "description": "CMPayments Order API SDK",
+  "license": "proprietary",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "CMPayments\\OrderApi\\": "src/"
+    }
+  }
+}

@@ -16,18 +16,6 @@ use CMPayments\OrderApi\Requests\Elements\PaymentPreference;
 class CreateRequest extends Request
 {
     /**
-     * @param string $merchantOrderReference
-     *
-     * @return $this
-     */
-    public function addMerchantOrderReference($merchantOrderReference)
-    {
-        $this->request[$this->requestName]['merchantOrderReference'] = $merchantOrderReference;
-
-        return $this;
-    }
-
-    /**
      * @param PaymentPreference $paymentPreferences
      *
      * @return $this

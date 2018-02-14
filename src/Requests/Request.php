@@ -1,4 +1,5 @@
 <?php
+
 namespace CMPayments\OrderApi\Requests;
 
 use CMPayments\OrderApi\Requests\Elements\Merchant;
@@ -19,7 +20,7 @@ class Request
 
 
     const ONE_PAGE_CHECKOUT_LIVE_URL = 'https://secure.docdatapayments.com/ps/menu';
-    const ONE_PAGE_CHECKOUT_DEV_URL = 'https://test.docdatapayments.com/ps/menu';
+    const ONE_PAGE_CHECKOUT_DEV_URL  = 'https://test.docdatapayments.com/ps/menu';
 
     const API_SOAP_VERSION = 1.3;
 
@@ -45,6 +46,18 @@ class Request
 
     }
 
+    /**
+     * @param string $merchantOrderReference
+     *
+     * @return $this
+     */
+    public function addMerchantOrderReference($merchantOrderReference)
+    {
+        $this->request[$this->requestName]['merchantOrderReference'] = $merchantOrderReference;
+
+        return $this;
+    }
+    
     /**
      * @return string
      */
@@ -85,13 +98,30 @@ class Request
     public function addPaymentAmount($amount)
     {
         $this->request[$this->requestName]['paymentAmount'] = [
-            '_' => $amount->getAmount(),
+            '_'         => $amount->getAmount(),
+            'currency'  => $amount->getCurrency()
+        ];
+
+        return $this;
+
+    }
+
+    /**
+     * @param Amount $amount
+     *
+     * @return $this
+     */
+    public function addAmount($amount)
+    {
+        $this->request[$this->requestName]['amount'] = [
+            '_'        => $amount->getAmount(),
             'currency' => $amount->getCurrency()
         ];
 
         return $this;
 
     }
+
 
     /**
      *

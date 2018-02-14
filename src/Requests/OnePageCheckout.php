@@ -110,6 +110,7 @@ class OnePageCheckout extends Request
     public function setPaymentOrderKey($paymentOrderKey)
     {
         $this->paymentOrderKey = $paymentOrderKey;
+
         return $this;
     }
 
@@ -296,6 +297,16 @@ class OnePageCheckout extends Request
     }
 
 
+    /**
+     * If you would overwrite the base url in the future
+     *
+     * @param string $url
+     */
+    public function setBaseUrl(string $url)
+    {
+        $this->url = $url;
+    }
+    
     /**
      * Create an one-page-payment-url
      */

@@ -57,6 +57,4 @@ class OfflinePaymentInput implements PaymentMethodInterface
     {
         $this->method = $method;
     }
-
-
 }

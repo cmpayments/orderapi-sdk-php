@@ -32,7 +32,4 @@ class KbcAuthorizationResult
         
         return $this;
     }
-    
-    
-
 }

@@ -55,6 +55,4 @@ class Vat
 
         return $this;
     }
-
-
 }

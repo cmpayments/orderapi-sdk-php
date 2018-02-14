@@ -78,6 +78,4 @@ class DirectDebitPaymentInputGroup
 
         return $this;
     }
-
-
 }

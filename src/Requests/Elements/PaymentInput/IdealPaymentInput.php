@@ -42,6 +42,4 @@ class IdealPaymentInput implements PaymentMethodInterface
 
         return $this;
     }
-
-
 }

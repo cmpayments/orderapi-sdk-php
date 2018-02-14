@@ -34,6 +34,4 @@ class MenuPreferences
 
         return $this;
     }
-
-
 }

@@ -46,7 +46,6 @@ class Company
         $this->name = $name;
 
         return $this;
-
     }
 
     /**
@@ -148,6 +147,4 @@ class Company
 
         return $this;
     }
-
-
 }

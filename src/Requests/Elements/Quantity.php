@@ -125,5 +125,4 @@ class Quantity
         $quantity->setQuantity($kilobytes);
         return $quantity;
     }
-
 }

@@ -15,7 +15,6 @@ use CMPayments\OrderApi\Requests\Request;
 use CMPayments\OrderApi\Requests\StartRequest;
 use CMPayments\OrderApi\Requests\StatusRequest;
 
-
 /**
  * Class Client
  *
@@ -61,7 +60,6 @@ class Client
     public function createRequest()
     {
         return (new CreateRequest($this->merchant))->addMerchant();
-
     }
 
     /**
@@ -278,6 +276,4 @@ class Client
         $this->soapClient = new \SoapClient($wsdl, $options);
         $this->soapClient->__setLocation($endpoint);
     }
-
-
 }

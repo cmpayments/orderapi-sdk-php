@@ -38,6 +38,4 @@ class BankTransferPaymentInput implements PaymentMethodInterface
     {
         $this->emailAddress = $emailAddress;
     }
-
-
 }

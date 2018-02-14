@@ -240,5 +240,4 @@ class Shopper
 
         return $this;
     }
-
 }

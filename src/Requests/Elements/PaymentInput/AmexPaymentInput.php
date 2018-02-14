@@ -21,6 +21,4 @@ class AmexPaymentInput extends CardPaymentInput implements PaymentMethodInterfac
     {
         return self::PAYMENT_METHOD;
     }
-
-
 }

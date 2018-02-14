@@ -57,6 +57,4 @@ class DirectDebitPaymentInput
 
         return $this;
     }
-
-
 }

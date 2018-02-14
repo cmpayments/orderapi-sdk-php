@@ -56,6 +56,4 @@ class ThreeDomainSecureAuthenticationResult
 
         return $this;
     }
-
-
 }

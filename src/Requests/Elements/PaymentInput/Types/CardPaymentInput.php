@@ -148,6 +148,4 @@ class CardPaymentInput
 
         return $this;
     }
-
-
 }

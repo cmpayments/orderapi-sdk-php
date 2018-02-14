@@ -31,6 +31,4 @@ class BankTransferPaymentInput
         $this->emailAddress = $emailAddress;
         return $this;
     }
-
-
 }

@@ -42,6 +42,4 @@ class PaypalPaymentInput implements PaymentMethodInterface
 
         return $this;
     }
-
-
 }

@@ -25,7 +25,9 @@ use Mockery\Exception;
 class StartRequest extends Request
 {
     /**
+     * @codingStandardsIgnoreStart
      * @param AmexPaymentInput|BankTransferPaymentInput|DirectDebitPaymentInput|ElvPaymentInput|IdealPaymentInput|MaestroPaymentInput|MasterCardPaymentInput|MisterCashPaymentInput|OfflinePaymentInput|PointOfSalePaymentInput|VisaPaymentInput|PaypalPaymentInput $paymentInput
+     * @codingStandardsIgnoreEnd
      *
      * @throws \Exception
      * @return $this
@@ -71,6 +73,7 @@ class StartRequest extends Request
                         'iban'       => $paymentInput->getDirectDebitPaymentInputGroup()->getIban()
                     ];
                 }
+                break;
             case 'bankTransferPaymentInput':
                 $paymentMethodArr['emailAddress'] = $paymentInput->getEmailAddress();
                 break;
@@ -163,5 +166,4 @@ class StartRequest extends Request
     {
         return ['paymentMethod' => strtoupper($paymentMethod)];
     }
-
 }

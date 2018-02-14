@@ -78,6 +78,4 @@ class PaypalAuthenticationResult
 
         return $this;
     }
-
-
 }

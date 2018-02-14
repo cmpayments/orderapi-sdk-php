@@ -47,6 +47,4 @@ class Register
     {
         $this->location = $location;
     }
-
-
 }

@@ -64,7 +64,7 @@ class CaptureRequest extends Request
     {
         if ($menuPreferences->getCssId() !== null) {
             $this->request[$this->requestName]['menuPreferences']['css'] = [
-                '_'  => '',
+                '_' => '',
                 'id' => $menuPreferences->getCssId()
             ];
         }
@@ -133,7 +133,7 @@ class CaptureRequest extends Request
     public function addTotalGrossAmount($totalGrossAmount)
     {
         $this->request[$this->requestName]['totalGrossAmount'] = [
-            '_'        => $totalGrossAmount->getAmount(),
+            '_' => $totalGrossAmount->getAmount(),
             'currency' => $totalGrossAmount->getCurrency()
         ];
 
@@ -141,7 +141,7 @@ class CaptureRequest extends Request
     }
 
     /**
-     * @param Name    $name
+     * @param Name $name
      * @param Address $address
      *
      * @return $this
@@ -149,7 +149,7 @@ class CaptureRequest extends Request
     public function addBillTo($name, $address)
     {
         $this->request[$this->requestName]['billTo'] = [
-            'name'    => $this->createNameElement($name),
+            'name' => $this->createNameElement($name),
             'address' => $this->createAddressElement($address)
         ];
 
@@ -181,7 +181,7 @@ class CaptureRequest extends Request
     }
 
     /**
-     * @param Invoice     $invoice
+     * @param Invoice $invoice
      * @param String|null $additionalDescription
      *
      * @return $this
@@ -198,23 +198,23 @@ class CaptureRequest extends Request
 
         if ($invoice->getTotalNetAmount() !== null) {
             $this->request[$this->requestName]['invoice']['totalNetAmount'] = [
-                '_'        => $invoice->getTotalNetAmount()->getAmount(),
+                '_' => $invoice->getTotalNetAmount()->getAmount(),
                 'currency' => $invoice->getTotalNetAmount()->getCurrency()
             ];
         }
 
         if ($invoice->getTotalVatAmount() !== null) {
             $this->request[$this->requestName]['invoice']['totalVatAmount'] = [
-                '_'        => $invoice->getTotalVatAmount()->getAmount()->getAmount(),
+                '_' => $invoice->getTotalVatAmount()->getAmount()->getAmount(),
                 'currency' => $invoice->getTotalVatAmount()->getAmount()->getCurrency(),
-                'rate'     => $invoice->getTotalVatAmount()->getRate()
+                'rate' => $invoice->getTotalVatAmount()->getRate()
             ];
         }
 
         $this->request[$this->requestName]['invoice']['item'] = $items;
 
         $this->request[$this->requestName]['invoice']['shipTo'] = [
-            'name'    => $this->createNameElement($invoice->getShipToName()),
+            'name' => $this->createNameElement($invoice->getShipToName()),
             'address' => $this->createAddressElement($invoice->getShipToaddress())
 
         ];
@@ -249,7 +249,7 @@ class CaptureRequest extends Request
         $totalGrossAmount = $this->createAmount($item->getTotalGrossAmount());
 
         $itemElements = [
-            '_'      => '',
+            '_' => '',
             'number' => $item->getNumber()
         ];
 
@@ -269,7 +269,6 @@ class CaptureRequest extends Request
         $itemElements['totalVat'] = $this->createVat($item->getTotalVat());
 
         return $itemElements;
-
     }
 
     /**
@@ -280,11 +279,11 @@ class CaptureRequest extends Request
     private function createAddressElement($address)
     {
         $addressArr = [
-            'street'     => $address->getStreet(),
+            'street' => $address->getStreet(),
             'postalCode' => $address->getPostalCode(),
-            'city'       => $address->getCity(),
-            'country'    => [
-                '_'    => '',
+            'city' => $address->getCity(),
+            'country' => [
+                '_' => '',
                 'code' => $address->getCountryCode()
             ]
         ];
@@ -298,7 +297,6 @@ class CaptureRequest extends Request
         }
 
         return $addressArr;
-
     }
 
     /**
@@ -310,12 +308,12 @@ class CaptureRequest extends Request
     {
 
         return [
-            'prefix'   => $name->getPrefix(),
+            'prefix' => $name->getPrefix(),
             'initials' => $name->getInitials(),
-            'first'    => $name->getFirstname(),
-            'middle'   => $name->getMiddlename(),
-            'last'     => $name->getLastname(),
-            'suffix'   => $name->getSuffix()
+            'first' => $name->getFirstname(),
+            'middle' => $name->getMiddlename(),
+            'last' => $name->getLastname(),
+            'suffix' => $name->getSuffix()
         ];
     }
 }

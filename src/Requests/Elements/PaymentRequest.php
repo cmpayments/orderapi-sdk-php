@@ -32,5 +32,4 @@ class PaymentRequest
 
         return $this;
     }
-
 }

@@ -65,6 +65,4 @@ class DirectDebitPaymentInput implements PaymentMethodInterface
 
         return $this;
     }
-
-
 }

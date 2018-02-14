@@ -348,7 +348,5 @@ class OnePageCheckout extends Request
         }
 
         return $this->baseUrl . '?' . http_build_query($params);
-
     }
-
 }

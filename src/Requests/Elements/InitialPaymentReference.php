@@ -32,6 +32,4 @@ class InitialPaymentReference
 
         return $this;
     }
-
-
 }

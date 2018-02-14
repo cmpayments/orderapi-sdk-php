@@ -76,6 +76,4 @@ class ElvPaymentInput implements PaymentMethodInterface
     {
         $this->iban = $iban;
     }
-
-
 }

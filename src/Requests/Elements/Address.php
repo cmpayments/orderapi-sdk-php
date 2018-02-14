@@ -160,6 +160,4 @@ class Address
 
         return $this;
     }
-
-
 }

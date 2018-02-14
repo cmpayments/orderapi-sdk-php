@@ -147,6 +147,4 @@ class Name
 
         return $this;
     }
-
-
 }

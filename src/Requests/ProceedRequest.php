@@ -21,7 +21,7 @@ class ProceedRequest extends Request
      *
      * @return $this
      */
-    public function ThreeDomainSecureAuthenticationResult($threeDomainSecureAuthenticationResult)
+    public function threeDomainSecureAuthenticationResult($threeDomainSecureAuthenticationResult)
     {
         $this->request[$this->requestName]['threeDomainSecureAuthenticationResult'] = [
             'MD'    => $threeDomainSecureAuthenticationResult->getMd(),
@@ -34,7 +34,7 @@ class ProceedRequest extends Request
     /**
      * @return $this
      */
-    public function Ideal()
+    public function ideal()
     {
         $this->request[$this->requestName]['iDealAuthorizationResult'] = '';
 
@@ -46,7 +46,7 @@ class ProceedRequest extends Request
      *
      * @return $this
      */
-    public function KBC(KbcAuthorizationResult $kbcAuthorizationResult)
+    public function kbc(KbcAuthorizationResult $kbcAuthorizationResult)
     {
         $this->request[$this->requestName]['kbcAuthorizationResult'] = [
             'olpCtx' => $kbcAuthorizationResult->getOlpCtx()
@@ -58,7 +58,7 @@ class ProceedRequest extends Request
     /**
      * @return $this
      */
-    public function Paypal(PaypalAuthenticationResult $paypalAuthenticationResult)
+    public function paypal(PaypalAuthenticationResult $paypalAuthenticationResult)
     {
         $this->request[$this->requestName]['paypalAuthenticationResult'] = [
             'Token' => $paypalAuthenticationResult->getToken(),
@@ -66,7 +66,8 @@ class ProceedRequest extends Request
         ];
 
         if ($paypalAuthenticationResult->getPayerId() !== null) {
-            $this->request[$this->requestName]['paypalAuthenticationResult']['PayerId'] = $paypalAuthenticationResult->getPayerId();
+            $this->request[$this->requestName]['paypalAuthenticationResult']['PayerId'] =
+                $paypalAuthenticationResult->getPayerId();
         }
 
         return $this;

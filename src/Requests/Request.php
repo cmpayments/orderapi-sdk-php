@@ -43,7 +43,6 @@ class Request
         $this->requestName = __CLASS__;
         $this->merchant = $merchant;
         $this->createNewRequest();
-
     }
 
     /**
@@ -103,7 +102,6 @@ class Request
         ];
 
         return $this;
-
     }
 
     /**
@@ -119,7 +117,6 @@ class Request
         ];
 
         return $this;
-
     }
 
 
@@ -214,7 +211,6 @@ class Request
         $vatElement['amount'] = $vatAmount;
 
         return $vatElement;
-
     }
 
     /**
@@ -223,21 +219,5 @@ class Request
     public function getRequest()
     {
         return $this->request;
-    }
-
-    /**
-     * @param Elements\Amount $amount
-     *
-     * @return $this
-     */
-    public function addAmount($amount)
-    {
-        $this->request[$this->requestName]['amount'] = [
-            '_' => $amount->getAmount(),
-            'currency' => $amount->getCurrency()
-        ];
-
-        return $this;
-
     }
 }

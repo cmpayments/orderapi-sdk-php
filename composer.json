@@ -6,6 +6,10 @@
   "require": {
     "php": ">=5.5.9"
   },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.3",
+    "jakub-onderka/php-parallel-lint": "^0.9.0"
+  },
   "autoload": {
     "psr-4": {
       "CMPayments\\OrderApi\\": "src/"

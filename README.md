@@ -1,5 +1,11 @@
 # CMPayments Order API SDK for PHP
-For more information about this calls, see the documentation. This SDK is a toolbox, more information about the working of the Webdirect or One-Page-Checkout, see the integration manual at https://www.docdatapayments.com/developer/api/.
+
+
+[![Build Status][badge-build]][build]
+[![Software License][badge-license]][license]
+[![Total Downloads][badge-downloads]][downloads]
+
+For more information about the Order API calls, see the documentation. This SDK is a toolbox, for more information about the inner workings of the Webdirect or One-Page-Checkout, see the integration manual at https://www.docdatapayments.com/developer/api/.
 
 ## Installation
 To install the SDK, simply use [Composer](https://getcomposer.org/):
@@ -7,45 +13,50 @@ To install the SDK, simply use [Composer](https://getcomposer.org/):
 
 ## Setting up a connection
 
-Setting up a connection by filling in the `username` and `password`. If you want to use the sandbox environment, add `true` as third parameter.
-All the requests are create from this client.
+Set up a connection by filling in the `username` and `password`. If you want to use the sandbox environment, add `true` as third parameter.
+All requests are created from this client.
 
-```
-$client = new CMPayments\OrderApi\Client(<username>, <password>);
+```php
+<?php
+$client = new CMPayments\OrderApi\Client('<username>', '<password>');
 ```
 
 
 ## Create request
-This create request will descripe a full request with a lot of optional fields.
+This request will descripe a full request with a lot of optional fields.
 
 
 First create a `merchantOrderReference` which refers to the your internal unique reference for this order and is used by the system for informational purposes in the Merchant BackOffice.
 
-```
+```php
+<?php
 $merchantOrderReference = time();
 ```
 
 The PaymentPreference specifies the settings to use for all payments which are going to be made on this order.
 Replace `<payment_profile>` with your own payment profile.
 
-```
+```php
+<?php
 $paymentPreferences = new CMPayments\OrderApi\Requests\Elements\PaymentPreference();
-$paymentPreferences->setProfile(<payment_profile>)
+$paymentPreferences->setProfile('<payment_profile>')
    ->setNumberOfDaysToPay(14)
    ->addPeriod(7, 'unknown')
    ->addPeriod(7);
 ```
 
-If you use a special css-id, you could replace the id from below.
+Different visual styles are supported through CSS profiles. The id of this profile can be set like this:
 
-```
+```php
+<?php
 $menuPreference = new CMPayments\OrderApi\Requests\Elements\MenuPreferences();
 $menuPreference->setCssId(1);
 ```
 
-The system is requiring shopperinformation. The `name` element could also be provided with more information, like `middlename`, `suffix`, `prefix` etc.
+The payment system requires shopper information for each order. The `name` element could also be provided with more information, like `middlename`, `suffix`, `prefix` etc.
 
-```
+```php
+<?php
 $shopper = new CMPayments\OrderApi\Requests\Elements\Shopper();
 $name = new CMPayments\OrderApi\Requests\Elements\Name();
 $name->setFirstname('Testpersoon-nl')
@@ -53,19 +64,19 @@ $name->setFirstname('Testpersoon-nl')
 
 /* Note: date of birth must be a \DateTime */
 $dateOfBirth = DateTime::createFromFormat('Y-m-d', '1970-07-10');
-$shopper->setShopperId(<customer_id>)
+$shopper->setShopperId('<customer_id>')
    ->setName($name)
    ->setEmail('accepted@yourdomain.com')
    ->setLanguageCode('nl')
    ->setGender('M')
    ->setDateOfBirth($dateOfBirth)
    ->setPhoneNumber('0612345678');
-
 ```
 
-Billing and shippinginformation of the transaction. The shipping and billingaddress are the same in this example, even the receivers name is the same.
+Set billing and shipping information for the transaction. The shipping and billing address are the same in this example, even the receivers name is the same.
 
-```
+```php
+<?php
 $billToAddress = new CMPayments\OrderApi\Requests\Elements\Address();
 $billToAddress->setStreet('street')
    ->setHouseNumber('1')
@@ -78,9 +89,10 @@ $shipToAddress = $billToAddress;
 $shipToName = $name;
 ```
 
-We will create an invoice with 3 products. 1 x a Kingston microSD and 2 pieces of the DVD 'Lonely Planet Thailand'
+Here an invoice is created with 3 products. 1 Kingston microSD card and 2 pieces of the DVD 'Lonely Planet Thailand'
 
-```
+```php
+<?php
 $invoice = new CMPayments\OrderApi\Requests\Elements\Invoice();
 /* The total amount to pay incl. vat */
 $paymentAmount = CMPayments\OrderApi\Requests\Elements\Amount::EUR(33.30);
@@ -142,7 +154,7 @@ $invoice->setTotalNetAmount(CMPayments\OrderApi\Requests\Elements\Amount::EUR(30
    ->setAdditionalDescription('Add. Description');
 
 /*
- * Creat the acutal request
+ * Create the actual request
  */
 $createRequest = $client->createRequest();
 
@@ -163,17 +175,18 @@ $createRequest->addMerchantOrderReference($merchantOrderReference)
 
 The final step is to send the `CreateRequest` to the API.
 
-```
+```php
+<?php
 //Do the actual request to the endpoint
 $createResponse = $client->executeCreateRequest($createRequest);
 ```
 
 ## One Page Checkout
-If you don't want to create different views for every payment method, there is a default checkout page which could be used
-with the code from below 
-Note: Please verify with DDP if your account has access for this feature
+If you don't want to create different views for every payment method, there is a default checkout page that can be used.
+Note: The One Page Checkout is a feature that must be enabled in your account
 
-```
+```php
+<?php
 $opcResponse = $client->createOnePageCheckOut($createResponse->createSuccess->key)
 ->setClientLanguage('nl')
 ->setReturnUrlCancelled('https://www.yourdomain.com/cancelled')
@@ -184,27 +197,27 @@ $opcResponse = $client->createOnePageCheckOut($createResponse->createSuccess->ke
 header('Location: ' . $opcResponse->getPaymentUrl());
 ```
 
-
-
 ## startRequest
-The START request is specific to the Webdirect scenario where a payment can be controlled without online interaction with the shopper.
+The start request is specific to the Webdirect scenario where a payment can be initiated without online interaction with the shopper.
 In this example we will start an iDEAL transaction.
-Note: Please verify with DDP if your account has access for this feature
+Note: The start request functionality is a feature that must be enabled in your account
 
 List if iDEAL issuers in this API:
-- RABO
 - ABNAMRO
-- FRIESLANDBANK
-- VANLANSCHOT
-- TRIODOS
-- ING
-- SNS
 - ASN
-- REGIOBANK
-- KNAB
 - BUNQ
+- FRIESLANDBANK
+- ING
+- KNAB
+- RABO
+- REGIOBANK
+- SNS
+- TRIODOS
+- VANLANSCHOT
 
-```
+
+```php
+<?php
 $paymentMethodData = new CMPayments\OrderApi\Requests\Elements\PaymentInput\IdealPaymentInput();
 $paymentMethodData->setIssuerId('RABO');
 $shopperInfo = new CMPayments\OrderApi\Requests\Elements\ShopperInfo();
@@ -228,11 +241,12 @@ header('Location: ' . $startResponse->startSuccess->redirect->url);
 
 
 ## proceedRequest
-The PROCEED request is specific to the Webdirect scenario where the shopper is redirected to an acquirer. It
+The proceed request is specific to the Webdirect scenario where the shopper is redirected to an acquirer. It
 is used to finish the authorisation after the merchant returns from the acquirer. For example when the shopper is sent directly to
 iDEAL or 3D Secure.
 
-```
+```php
+<?php
 //Create a proceeed request
 $proceedRequest = $client->createProceedRequest(<payment_id>);
 //Tell the request that it has to be an iDEAL proceed
@@ -242,54 +256,66 @@ $proceedResponse = $client->executeProceedRequest($proceedRequest);
 ```
 
 ## captureRequest
-The purpose of the CAPTURE request is to force the Docdata system to capture a payment order which is successfully authorized
-for processing by the acquirer. This operation however is not required in all scenario’s. Depending on the payment method,
-Docdata offers an option to automatically capture payment orders after a predefined number of days. This option supports
+The purpose of the capture request is to force the payment system to capture a payment order which is successfully authorized
+for processing by the acquirer. This operation however is not required in all scenarios. Depending on the payment method,
+the payment system offers an option to automatically capture payment orders after a predefined number of days. This option supports
 payment methods like AfterPay and Klarna Invoice where products are only to be shipped when the products are collected for shipment
 
-```
+```php
+<?php
 $captureRequest = $client->createCaptureRequest(payment_id>, CMPayments\OrderApi\Requests\Elements\Amount::EUR(33.30));
 $captureResponse = $client->executeCaptureRequest($captureRequest);
 ```
 
 ## statusRequest
-The STATUS request can be used to retrieve a report reflecting the actual status of an Order, its payments
+The status request can be used to retrieve a report reflecting the actual status of an Order, its payments
 and its captures or refunds. The statusRequest is used to determine whether an Order is considered “paid”.
 
-```
+```php
+<?php
 $statusRequest = $client->createStatusRequest(<PaymentOrderKey>);
 $statusResponse = $client->executeStatusRequest($statusRequest);
 ```
 
-
 ## statusExtendedRequest
-The EXTENDED STATUS request can be used to retrieve additional information of an Order, its payments and its captures or refunds.
+The extended status request can be used to retrieve additional information of an Order, its payments and its captures or refunds.
 
-```
+```php
+<?php
 $statusExtendedRequest = $client->createExtendedStatusRequest(<PaymentOrderKey>);
 $statusExtendedResponse = $client->executeExtendedStatusRequest($statusExtendedRequest);
 ```
 
 ## cancelRequest
-The purpose of the CANCEL request is to force the Docdata system not to accept any payment actions for the given Order anymore.
-In a scenario where a shopper has cancelled the order in the web shop, the CANCEL request is to be used to synchronize the
-administration in both the web shop and the Docdata system to ensure no payments are processed by Docdata for the order.
+The purpose of the cancel request is to force the payment system not to accept any payment actions for the given Order anymore.
+In a scenario where a shopper has cancelled the order in the web shop, the cancel request is to be used to synchronize the
+administration in both the web shop and the payment system to ensure no payments are processed by the payment system for the order.
 
-```
+```php
+<?php
 $cancelRequest = $client->createCancelRequest(<PaymentOrderKey>);
 $cancelResponse = $client->executeCancelRequest($cancelRequest);
 ```
 
 ## refundRequest
-In cases where a Merchant wants to refund a certain amount on a Payment Order the REFUND request can be used. The refundRequest
-enables the refund process to be controlled and automated end-to-end between the web shop and the Docdata system.
+In cases where a merchant wants to refund a certain amount on a Payment Order the refund request can be used. The refund request
+enables the refund process to be controlled and automated end-to-end between the web shop and the payment system.
 
 @Todo implement the full refund option instead of the simple version.
 
-```
+```php
+<?php
 $refundRequest = $client->createRefundRequest(<payment_id>);
 $refundRequest->addAmount(CMPayments\OrderApi\Requests\Elements\Amount::EUR(21.20))
 ->setItemCode(9781741791570)
 ->setDescription('Wrong dvd');
 $refundResponse = $client->executeRefundRequest($refundRequest);
 ```
+
+[badge-build]: https://img.shields.io/travis/cmpayments/orderapi-sdk-php.svg?style=flat-square
+[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[badge-downloads]: https://img.shields.io/packagist/dt/cmpayments/orderapi-sdk-php.svg?style=flat-square
+
+[license]: https://github.com/cmpayments/orderapi-sdk-php/blob/master/LICENSE
+[build]: https://travis-ci.org/cmpayments/orderapi-sdk-php
+[downloads]: https://packagist.org/packages/cmpayments/orderapi-sdk-php

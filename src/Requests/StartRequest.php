@@ -38,6 +38,7 @@ class StartRequest extends Request
         $classnameElements = explode('\\', $classname);
         $paymentMethod = lcfirst(array_pop($classnameElements));
 
+        $paymentMethodArr = [];
 
         switch ($paymentMethod) {
             case 'amexPaymentInput':

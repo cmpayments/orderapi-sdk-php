@@ -13,7 +13,7 @@ class RefundRequest extends Request
 
     public function setMerchantRefundReference($reference)
     {
-        $this->request[$this->requestName]['merchantRefundReference'] = $text;
+        $this->request[$this->requestName]['merchantRefundReference'] = $reference;
 
         return $this;
     }

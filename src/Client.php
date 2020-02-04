@@ -8,6 +8,7 @@ use CMPayments\OrderApi\Requests\CreateRequest;
 use CMPayments\OrderApi\Requests\Elements\Amount;
 use CMPayments\OrderApi\Requests\Elements\Merchant;
 use CMPayments\OrderApi\Requests\ExtendedStatusRequest;
+use CMPayments\OrderApi\Requests\ListPaymentMethodsRequest;
 use CMPayments\OrderApi\Requests\OnePageCheckout;
 use CMPayments\OrderApi\Requests\ProceedRequest;
 use CMPayments\OrderApi\Requests\RefundRequest;
@@ -50,6 +51,22 @@ class Client
         $this->merchant = new Merchant($username, $password);
         $this->isTest = $isTest ? 1 : 0;
         $this->initSoap();
+    }
+
+    /**
+     * @param string $paymentOrderKey The payment order key.
+     * @return ListPaymentMethodsRequest
+     */
+    public function createListPaymentMethodsRequest(string $paymentOrderKey)
+    {
+        return (new ListPaymentMethodsRequest($this->merchant))
+            ->addMerchant()
+            ->addPaymentOrderKey($paymentOrderKey);
+    }
+
+    public function executeListPaymentMethodsRequest($request)
+    {
+        return $this->executeSoapRequest($request, 'listPaymentMethodsRequest', 'listPaymentMethods');
     }
 
     /**

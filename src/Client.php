@@ -59,7 +59,7 @@ class Client
      */
     public function createListPaymentMethodsRequest(string $paymentOrderKey)
     {
-        return (new ListPaymentMethodsRequest($this->merchant))
+        return (new Request($this->merchant))
             ->addMerchant()
             ->addPaymentOrderKey($paymentOrderKey);
     }

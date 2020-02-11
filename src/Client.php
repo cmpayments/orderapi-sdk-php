@@ -129,7 +129,7 @@ class Client
     /**
      * @param string $paymentId
      *
-     * @return StartRequest
+     * @return ProceedRequest
      */
     public function createProceedRequest($paymentId)
     {

@@ -78,8 +78,12 @@ class StartRequest extends Request
             case 'bankTransferPaymentInput':
                 $paymentMethodArr['emailAddress'] = $paymentInput->getEmailAddress();
                 break;
+
+            case 'belfiusPaymentInput':
+            case 'ingHomePayPaymentInput':
             case 'pointOfSalePaymentInput':
                 break;
+
             case 'offlinePaymentInput':
                 $paymentMethodArr['register'] = [
                     'id'       => $paymentInput->getRegister()->getId,

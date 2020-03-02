@@ -43,7 +43,7 @@ class IngHomePayAuthorizationResult
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public function getCurrency()
     {
         return $this->currency;
     }
@@ -51,7 +51,7 @@ class IngHomePayAuthorizationResult
     /**
      * @param string $currency
      */
-    public function setCurrency(string $currency): void
+    public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
@@ -59,7 +59,7 @@ class IngHomePayAuthorizationResult
     /**
      * @return string
      */
-    public function getVendorId(): string
+    public function getVendorId()
     {
         return $this->vendorId;
     }
@@ -67,7 +67,7 @@ class IngHomePayAuthorizationResult
     /**
      * @param string $vendorId
      */
-    public function setVendorId(string $vendorId): void
+    public function setVendorId(string $vendorId)
     {
         $this->vendorId = $vendorId;
     }
@@ -75,7 +75,7 @@ class IngHomePayAuthorizationResult
     /**
      * @return string
      */
-    public function getAmount(): string
+    public function getAmount()
     {
         return $this->amount;
     }
@@ -83,7 +83,7 @@ class IngHomePayAuthorizationResult
     /**
      * @param string $amount
      */
-    public function setAmount(string $amount): void
+    public function setAmount(string $amount)
     {
         $this->amount = $amount;
     }
@@ -91,7 +91,7 @@ class IngHomePayAuthorizationResult
     /**
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage()
     {
         return $this->message;
     }
@@ -99,7 +99,7 @@ class IngHomePayAuthorizationResult
     /**
      * @param string $message
      */
-    public function setMessage(string $message): void
+    public function setMessage(string $message)
     {
         $this->message = $message;
     }
@@ -107,7 +107,7 @@ class IngHomePayAuthorizationResult
     /**
      * @return string
      */
-    public function getReturnCode(): string
+    public function getReturnCode()
     {
         return $this->returnCode;
     }
@@ -115,7 +115,7 @@ class IngHomePayAuthorizationResult
     /**
      * @param string $returnCode
      */
-    public function setReturnCode(string $returnCode): void
+    public function setReturnCode(string $returnCode)
     {
         $this->returnCode = $returnCode;
     }
@@ -123,7 +123,7 @@ class IngHomePayAuthorizationResult
     /**
      * @return string
      */
-    public function getHash(): string
+    public function getHash()
     {
         return $this->hash;
     }
@@ -131,7 +131,7 @@ class IngHomePayAuthorizationResult
     /**
      * @param string $hash
      */
-    public function setHash(string $hash): void
+    public function setHash(string $hash)
     {
         $this->hash = $hash;
     }

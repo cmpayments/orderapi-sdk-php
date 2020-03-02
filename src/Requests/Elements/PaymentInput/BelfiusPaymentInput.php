@@ -11,9 +11,15 @@ use CMPayments\OrderApi\Requests\Elements\PaymentInput\PaymentMethodInterface;
  */
 class BelfiusPaymentInput implements PaymentMethodInterface
 {
+    /**
+     * @var string $PAYMENT_METHOD Authorization status.
+     */
     const PAYMENT_METHOD = 'BELFIUS_PAY_BUTTON';
 
-    public function getPaymentMethod(): string
+    /**
+     * @return string Belfius payment method identifier.
+     */
+    public function getPaymentMethod()
     {
         return self::PAYMENT_METHOD;
     }

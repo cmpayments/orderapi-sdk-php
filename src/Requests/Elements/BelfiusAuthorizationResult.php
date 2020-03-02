@@ -18,7 +18,7 @@ class BelfiusAuthorizationResult
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getStatus()
     {
         return $this->status;
     }
@@ -26,7 +26,7 @@ class BelfiusAuthorizationResult
     /**
      * @param string $status
      */
-    public function setStatus(string $status): void
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }

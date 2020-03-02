@@ -11,9 +11,15 @@ use CMPayments\OrderApi\Requests\Elements\PaymentInput\PaymentMethodInterface;
  */
 class IngHomePayPaymentInput implements PaymentMethodInterface
 {
+    /**
+     * @var string PAYMENT_METHOD ING home pay identifier.
+     */
     const PAYMENT_METHOD = 'ING_HOME_PAY';
 
-    public function getPaymentMethod(): string
+    /**
+     * @return string Identifier for ING Home'Pay.
+     */
+    public function getPaymentMethod()
     {
         return self::PAYMENT_METHOD;
     }

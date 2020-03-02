@@ -2,7 +2,10 @@
 
 namespace CMPayments\OrderApi\Requests;
 
+use CMPayments\OrderApi\Requests\Elements\Amount;
+use CMPayments\OrderApi\Requests\Elements\BelfiusAuthorizationResult;
 use CMPayments\OrderApi\Requests\Elements\IdealAuthorizationResult;
+use CMPayments\OrderApi\Requests\Elements\IngHomePayAuthorizationResult;
 use CMPayments\OrderApi\Requests\Elements\KbcAuthorizationResult;
 use CMPayments\OrderApi\Requests\Elements\PaypalAuthenticationResult;
 use CMPayments\OrderApi\Requests\Elements\ThreeDomainSecureAuthenticationResult;
@@ -12,6 +15,7 @@ use CMPayments\OrderApi\Requests\Elements\ThreeDomainSecureAuthenticationResult;
  *
  * @package CMPayments\OrderApi\Requests
  * @author  Michel Westerink <michel.westerink@cmtelecom.com>
+ * @author  Michel Megens <michel.megens@cmtelecom.com>
  */
 class ProceedRequest extends Request
 {
@@ -50,6 +54,39 @@ class ProceedRequest extends Request
     {
         $this->request[$this->requestName]['kbcAuthorizationResult'] = [
             'olpCtx' => $kbcAuthorizationResult->getOlpCtx()
+        ];
+
+        return $this;
+    }
+
+    /**
+     * @param BelfiusAuthorizationResult $result Authorization result from PS.
+     * @return $this Proceed request to allow chaining.
+     */
+    public function belfius(BelfiusAuthorizationResult $result)
+    {
+        $this->request[$this->requestName]['belfiusAuthorizationResult'] =  [
+            'status' => $result->getStatus()
+        ];
+
+        return $this;
+    }
+
+    /**
+     * @param IngHomePayAuthorizationResult $ingResult Authorization result from PS.
+     * @return $this Proceed request to allow chaining.
+     */
+    public function ingHomePay(IngHomePayAuthorizationResult $ingResult)
+    {
+        $this->request[$this->requestName]['ingHomePayAuthorizationResult'] = [
+            'vendorId' => $ingResult->getVendorId(),
+            'message' => $ingResult->getMessage(),
+            'returnCode' => $ingResult->getReturnCode(),
+            'hash' => $ingResult->getHash(),
+            'amount' => [
+                '_' => $ingResult->getAmount(),
+                'currency' => $ingResult->getCurrency()
+            ]
         ];
 
         return $this;

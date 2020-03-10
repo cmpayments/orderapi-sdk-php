@@ -10,6 +10,10 @@ namespace CMPayments\OrderApi\Requests\Elements;
  */
 class PaymentPreference
 {
+    const EXPIRE_AFTER_UNIT_MINUTES = 'MINUTES';
+    const EXPIRE_AFTER_UNIT_HOURS = 'HOURS';
+    const EXPIRE_AFTER_UNIT_DAYS = 'DAYS';
+
     /** @var string */
     private $profile;
 
@@ -22,6 +26,12 @@ class PaymentPreference
     /** @var string */
     private $terminalId;
 
+    /** @var string */
+    private $expireAfterUnit;
+
+    /** @var integer */
+    private $expireAfterDuration;
+
     public function addPeriod(int $numberOfDays, string $profile = null)
     {
         $period = ['numberOfDays' => $numberOfDays];
@@ -32,6 +42,38 @@ class PaymentPreference
         $this->periods[] = $period;
 
         return $this;
+    }
+
+    /**
+     * Unit could be 'MINUTES', 'HOURS', or 'DAYS'
+     *
+     * @param string $unit
+     * @param int    $duration
+     *
+     * @return $this
+     */
+    public function setExpireAfter(string $unit, int $duration)
+    {
+        $this->expireAfterUnit = $unit;
+        $this->expireAfterDuration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExpireAfterUnit()
+    {
+        return $this->expireAfterUnit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpireAfterDuration()
+    {
+        return $this->expireAfterDuration;
     }
 
     /**

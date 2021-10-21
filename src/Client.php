@@ -281,7 +281,7 @@ class Client
     /**
      * initialize the soap-client
      */
-    private function initSoap()
+    public function initSoap($headers = null)
     {
         $wsdl = $this->isTest ? Request::WSDL_TEST : Request::WSDL_LIVE;
         $endpoint = $this->isTest ? Request::ENDPOINT_API_TEST : Request::ENDPOINT_API_LIVE;
@@ -289,6 +289,20 @@ class Client
         $options = [
             'trace' => $this->isTest ? 1 : 0,
         ];
+
+        if ($headers !== null && is_array($headers) && !empty($headers)) {
+            $headerString = '';
+            foreach ($headers as $key => $value) {
+                $headerString .= strtoupper($key) . ': '.$value."\r\n";
+            }
+            $options['stream_context'] = stream_context_create(
+                [
+                    'http' => [
+                        'header' => $headerString
+                    ]
+                ]
+            );
+        }
 
         $this->soapClient = new \SoapClient($wsdl, $options);
         $this->soapClient->__setLocation($endpoint);

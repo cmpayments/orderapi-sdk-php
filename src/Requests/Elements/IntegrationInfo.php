@@ -39,8 +39,6 @@ class IntegrationInfo
         $this->integratorName = 'CMP DDP PHP SDK';
         $this->programmingLanguage = 'PHP/' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
         $this->operatingSystem = PHP_OS;
-        $parts = explode(' ', php_uname());
-        $this->operatingSystemVersion = (!empty($parts[3]) ? $parts[3] : null) . (!empty($parts[2]) ? $parts[2] : null);
     }
 
     /**
